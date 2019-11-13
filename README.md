@@ -1,1 +1,1 @@
-A metronome built with React following the Metronome project. Kyra and I worked together on this app.
+A metronome built with React following the Metronome project here: https://daveceddia.com/react-practice-projects/. Kyra and I worked together on this app.
