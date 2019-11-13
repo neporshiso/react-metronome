@@ -2,6 +2,24 @@ import React, { Component } from "react";
 import "./Metronome.css";
 import click1 from "./audio/click1.wav";
 import click2 from "./audio/click2.wav";
+import record from "./images/record.png";
+import styled, { keyframes } from "styled-components";
+
+// Create the keyframes
+const rotate = keyframes`
+        from {
+        transform: rotate(0deg);
+        }
+        to {
+        transform: rotate(360deg);
+        }
+        `;
+// Here we create a component that will rotate everything we pass in over two seconds
+const Rotate = styled.div`
+    display: inline-block;
+    animation: ${rotate} 2s linear infinite;
+    font-size: 1.2rem;
+`;
 
 class Metronome extends Component {
     state = {
@@ -73,21 +91,45 @@ class Metronome extends Component {
         const { playing, bpm } = this.state;
 
         return (
-            <div className="metronome">
-                <div className="bpm-slider">
-                    <div>{bpm} BPM</div>
-                    <input
-                        type="range"
-                        min="60"
-                        max="240"
-                        value={bpm}
-                        onChange={this.handleBpmChange}
-                    />
+            <>
+                <div className="metronome">
+                    <div className="bpm-slider">
+                        <div>{bpm} BPM</div>
+                        <input
+                            type="range"
+                            min="60"
+                            max="240"
+                            value={bpm}
+                            onChange={this.handleBpmChange}
+                        />
+                    </div>
+                    <button onClick={this.startStop}>
+                        {playing ? "Stop" : "Start"}
+                    </button>
                 </div>
-                <button onClick={this.startStop}>
-                    {playing ? "Stop" : "Start"}
-                </button>
-            </div>
+
+                {playing ? (
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}
+                    >
+                        <Rotate>
+                            <img src={record}></img>
+                        </Rotate>
+                    </div>
+                ) : (
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}
+                    >
+                        <img src={record}></img>
+                    </div>
+                )}
+            </>
         );
     }
 }
