@@ -3,6 +3,8 @@ import "./Metronome.css";
 import click1 from "./audio/click1.wav";
 import click2 from "./audio/click2.wav";
 import record from "./images/record.png";
+import start from "./images/start.png";
+import stop from "./images/stop.png";
 import styled, { keyframes } from "styled-components";
 
 // Create the keyframes
@@ -103,9 +105,16 @@ class Metronome extends Component {
                             onChange={this.handleBpmChange}
                         />
                     </div>
-                    <button onClick={this.startStop}>
-                        {playing ? "Stop" : "Start"}
-                    </button>
+
+                    {playing ? (
+                        <button>
+                            <img className="control" src={stop} onClick={this.startStop}/>
+                        </button>
+                    ) : (
+                        <button>
+                            <img className="control" src={start} onClick={this.startStop} />
+                        </button>
+                    )}
                 </div>
 
                 {playing ? (
